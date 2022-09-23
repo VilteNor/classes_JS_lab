@@ -28,13 +28,20 @@ Dealership.prototype.getStock=function(){return this.stock};
 // Count the number of cars in stock
 Dealership.prototype.getStockSize=function(){return this.stock.length};
 // Add a car to stock
-Dealership.prototype.addCar=function(car){this.stock.push(car)};
+Dealership.prototype.addCar=function(car){
+    if(this.getStockSize()<this.capacity){
+    this.stock.push(car)}};
 // Return an array containing each car's manufacturer
 Dealership.prototype.getCarsManufacturers=function(){
     return this.getStock().map((car)=>car.getManufacturer())};
 // Find all the cars from a given manufacturer
+Dealership.prototype.getCarsByManufacturer=function(manufacturer){
+    return this.stock.filter((car)=> car.manufacturer===manufacturer)}
 // Find the total value of all the cars in stock
-
+Dealership.prototype.getCarsTotalValue=function(){
+    return this.getStock()
+    .map(car=>car.getPrice())
+    .reduce((total,price)=>total+price)};
 
 module.exports = { 
 Car,

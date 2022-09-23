@@ -34,6 +34,14 @@ describe('dealership tests', () => {
         actual = dealership1.getStockSize();
         expect(actual).toBe(expected);
     });
+    test('cannot add a car if stock capacity is reached', () => {
+        const car1= new Car("Honda",5000,"electric");
+        const dealership1= new Dealership("good deal",0);
+        dealership1.addCar(car1);
+        expected = 0;
+        actual = dealership1.getStockSize();
+        expect(actual).toBe(expected);
+    });
     test('can get an array of cars manufacturers', () => {
         const car1= new Car("Honda",5000,"electric");
         const dealership1= new Dealership("good deal",5);
@@ -42,4 +50,34 @@ describe('dealership tests', () => {
         actual = dealership1.getCarsManufacturers();
         expect(actual).toEqual(expected);
     });
+
+    test('can get an array of cars by manufacturer', () => {
+        const car1= new Car("Honda",5000,"electric");
+        const car2= new Car("BMW",10000,"hybrid");
+        const car3= new Car("BMW",6000,"electric");
+        const dealership1= new Dealership("good deal",5);
+        dealership1.addCar(car1);
+        dealership1.addCar(car2);
+        dealership1.addCar(car3);
+        expected =  [car2,car3];
+        actual = dealership1.getCarsByManufacturer("BMW");
+        expect(actual).toEqual(expected);
+    });
+    test('can get a total price of cars in stock', () => {
+        const car1= new Car("Honda",5000,"electric");
+        const car2= new Car("BMW",10000,"hybrid");
+        const car3= new Car("BMW",6000,"electric");
+        const dealership1= new Dealership("good deal",5);
+        dealership1.addCar(car1);
+        dealership1.addCar(car2);
+        dealership1.addCar(car3);
+        expected =  21000;
+        actual = dealership1.getCarsTotalValue();
+        expect(actual).toEqual(expected);
+    });
+
+
+
+
+
 });
